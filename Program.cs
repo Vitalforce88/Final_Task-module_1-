@@ -15,34 +15,62 @@
 // [“1234”, “1567”, “-2”, “computer science”] → [“-2”]
 // [“Russia”, “Denmark”, “Kazan”] → []
 
+// Печатает массив:
 void PrintStringArray(string[] Array)
 {
-    for(int i = 0; i < Array.Length; ++i)
-    {   
-        if(i == Array.Length-1)
+    for (int i = 0; i < Array.Length; ++i)
+    {
+        if (i == Array.Length - 1)
         {
-            System.Console.Write($"{Array[i]}");
+            System.Console.Write($"{Array[i]}\n");
             return;
-        }    
+        }
         System.Console.Write($"{Array[i]}, ");
     }
 }
 
+// Заполняет массив, исходя из его размера, согласно пользовательскому вводу:
 void FeelArray(string[] Array)
 {
     System.Console.WriteLine("Введите слова для заполнения:");
-    for(int i = 0; i < Array.Length; ++i)
+    for (int i = 0; i < Array.Length; ++i)
     {
         string input = Console.ReadLine();
         Array[i] = input;
-        System.Console.WriteLine($"Вы ввели {i+1} слов(о)(а)");
+        System.Console.WriteLine($"Вы ввели {i + 1} слов(о)(а)");
     }
+}
+
+//Выясняет сколько слов с тремя символами и меньше, возвращает массив слов:
+string[] ThreeOrLess(string[] Array)
+{
+    int resArraySizeCount = 0;
+
+    for (int i = 0; i < Array.Length; ++i)
+    {
+        if (Array[i].Length <= 3)
+        {
+            ++resArraySizeCount;
+        }
+    }
+    string[] ResultArray = new string[resArraySizeCount];
+    int resIndex = 0;
+    for (int i = 0; i < Array.Length; ++i)
+    {
+        if (Array[i].Length <= 3)
+        {
+            ResultArray[resIndex] = Array[i];
+            ++resIndex;
+        }
+    }
+
+    return ResultArray;
 }
 
 System.Console.Write("Введите, сколько слов вы хотите обработать: ");
 string input = Console.ReadLine();
 int WordsNumber = Convert.ToInt32(input);
-while(WordsNumber <= 0)
+while (WordsNumber <= 0)
 {
     System.Console.WriteLine("Введите число больше нуля(0):");
     input = Console.ReadLine();
@@ -54,5 +82,5 @@ string[] SourceArray = new string[WordsNumber];
 FeelArray(SourceArray);
 System.Console.WriteLine("Введённые вами слова:");
 PrintStringArray(SourceArray);
-
-
+System.Console.WriteLine($"Из них с тремя и менее букв, {(ThreeOrLess(SourceArray)).Length}:");
+PrintStringArray(ThreeOrLess(SourceArray));
