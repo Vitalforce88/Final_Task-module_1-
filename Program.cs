@@ -14,3 +14,45 @@
 // [“Hello”, “2”, “world”, “:-)”] → [“2”, “:-)”]
 // [“1234”, “1567”, “-2”, “computer science”] → [“-2”]
 // [“Russia”, “Denmark”, “Kazan”] → []
+
+void PrintStringArray(string[] Array)
+{
+    for(int i = 0; i < Array.Length; ++i)
+    {   
+        if(i == Array.Length-1)
+        {
+            System.Console.Write($"{Array[i]}");
+            return;
+        }    
+        System.Console.Write($"{Array[i]}, ");
+    }
+}
+
+void FeelArray(string[] Array)
+{
+    System.Console.WriteLine("Введите слова для заполнения:");
+    for(int i = 0; i < Array.Length; ++i)
+    {
+        string input = Console.ReadLine();
+        Array[i] = input;
+        System.Console.WriteLine($"Вы ввели {i+1} слов(о)(а)");
+    }
+}
+
+System.Console.Write("Введите, сколько слов вы хотите обработать: ");
+string input = Console.ReadLine();
+int WordsNumber = Convert.ToInt32(input);
+while(WordsNumber <= 0)
+{
+    System.Console.WriteLine("Введите число больше нуля(0):");
+    input = Console.ReadLine();
+    WordsNumber = Convert.ToInt32(input);
+};
+
+string[] SourceArray = new string[WordsNumber];
+
+FeelArray(SourceArray);
+System.Console.WriteLine("Введённые вами слова:");
+PrintStringArray(SourceArray);
+
+
